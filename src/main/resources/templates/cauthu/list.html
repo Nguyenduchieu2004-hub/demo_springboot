@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách cầu thủ</title>
+    <th:block th:insert="~{/layout/layout::library}"/>
+</head>
+<body>
+<div th:replace="~{/layout/layout::header}"></div>
+
+<div class="container mt-4">
+    <h2 class="mb-4">Danh sách cầu thủ</h2>
+<!--    <form action="/Cauthu/search" method="get" class="mb-3">-->
+<!--        <input name="searchName" placeholder="Nhập tên">-->
+<!--        <button class="btn btn-secondary">Tìm kiếm</button>-->
+<!--    </form>-->
+
+    <table class="table table-striped table-bordered table-hover align-middle text-center">
+        <thead class="table-dark">
+        <tr>
+            <th>STT</th>
+            <th>Mã Cầu Thủ</th>
+            <th>Họ Tên</th>
+            <th>Ngày Sinh</th>
+            <th>Kinh Nghiệm</th>
+            <th>Vị Trí</th>
+            <th>Hình Ảnh</th>
+            <th>Giới Tính</th>
+<!--            <th>Môn Học</th>-->
+            <th>Thao Tác</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="cauthu, status : ${cauthuList}">
+            <td th:text="${status.count}"></td>
+            <td th:text="${cauthu.maCauThu}"></td>
+            <td th:text="${cauthu.hoTen}"></td>
+            <td th:text="${cauthu.ngaySinh}"></td>
+            <td th:text="${cauthu.kinhNghiem}"></td>
+            <td th:text="${cauthu.viTri}"></td>
+            <td>
+                <img th:src="@{'/images/' + ${cauthu.hinhAnh}}"
+                     alt="Ảnh cầu thủ" class="img-thumbnail" width="100" height="130"/>
+            </td>
+            <td th:text="${cauthu.gioiTinh}"></td>
+<!--            <td>-->
+<!--                <span th:each="monHoc : ${cauthu.monHoc}" th:text="${monHoc}"></span>-->
+<!--            </td>-->
+            <td>
+                <a class="btn btn-sm btn-info" th:href="@{/Cauthu/detail/{id}(id=${cauthu.maCauThu})}">Chi Tiết</a>
+                <a class="btn btn-sm btn-warning" th:href="@{/Cauthu/edit/{id}(id=${cauthu.maCauThu})}">Sửa</a>
+                <a class="btn btn-sm btn-danger" th:href="@{/Cauthu/delete/{id}(id=${cauthu.maCauThu})}">Xóa</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

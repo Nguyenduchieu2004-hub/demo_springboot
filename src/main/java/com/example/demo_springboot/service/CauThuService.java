@@ -1,0 +1,45 @@
+package com.example.demo_springboot.service;
+
+import com.example.demo_springboot.entity.CauThu;
+import com.example.demo_springboot.repository.ICauThuRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class CauThuService implements ICauThuService {
+    @Autowired
+    private ICauThuRepository cauThuRepository;
+    @Override
+    public List<CauThu> findAll() {
+        return cauThuRepository.findAll();
+    }
+
+    @Override
+    public CauThu findById(int id) {
+        return cauThuRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Boolean addCauThu(CauThu cauThu) {
+
+        return cauThuRepository.save(cauThu)!=null;
+    }
+
+    @Override
+    public void deleteCauThu(int id) {
+
+        cauThuRepository.deleteById(id);
+    }
+
+    @Override
+    public void updateCauThu(CauThu cauThu) {
+        cauThuRepository.save(cauThu);
+    }
+
+//    @Override
+//    public List<CauThu> searchByName(String hoTen) {
+//        return cauThuRepository.findAllByHoTenContaining(hoTen);
+//    }
+}

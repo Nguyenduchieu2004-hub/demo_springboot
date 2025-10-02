@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:insert="~{/layout/layout::library}"/>
+</head>
+<body>
+<div th:replace="~{/layout/layout::header}"></div>
+<h1>Thêm mới</h1>
+<form action="/Cauthu/add" method="post" th:object="${cauThu}">
+
+
+    <p>
+        <label>Họ Tên:</label><br/>
+        <input th:field="*{hoTen}" />
+    </p>
+
+    <p>
+        <label>Ngày Sinh:</label><br/>
+        <input th:field="*{ngaySinh}" type="date" />
+    </p>
+
+    <p>
+        <label>Kinh Nghiệm:</label><br/>
+        <input th:field="*{kinhNghiem}" />
+    </p>
+
+    <p>
+        <label>Vị Trí:</label><br/>
+        <input th:field="*{viTri}" />
+    </p>
+
+    <p>
+        <label>Ảnh đại diện :</label><br/>
+        <input th:field="*{hinhAnh}" />
+    </p>
+
+    <p>
+        <label>Giới tính:</label><br/>
+        <input type="radio" th:field="*{gioiTinh}" value="true"/> Nam
+        <input type="radio" th:field="*{gioiTinh}" value="false"/> Nữ
+    </p>
+
+<!--    <p>-->
+<!--        <label>Môn học:</label><br/>-->
+<!--        <input type="checkbox" th:field="*{monHoc}" th:each="monHoc:${monHoc}" th:value="${monHoc}" th:text="${monHoc}"/><br>-->
+<!--    </p>-->
+
+    <p>
+        <button type="submit">Lưu</button>
+        <a th:href="@{/Cauthu}">Hủy</a>
+    </p>
+
+
+</form>
+</body>
+</html>

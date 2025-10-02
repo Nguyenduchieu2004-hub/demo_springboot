@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chi tiết cầu thủ</title>
+    <th:block th:insert="~{/layout/layout::library}"/>
+</head>
+<body>
+<div th:replace="~{/layout/layout::header}"></div>
+<h1>Chi tiết cầu thủ</h1>
+
+<p>Mã cầu thủ: <span th:text="${cauThu.maCauThu}"></span></p>
+<p>Họ tên: <span th:text="${cauThu.hoTen}"></span></p>
+<p>Ngày sinh: <span th:text="${cauThu.ngaySinh}"></span></p>
+<p>Kinh nghiệm: <span th:text="${cauThu.kinhNghiem}"></span></p>
+<p>Vị trí: <span th:text="${cauThu.viTri}"></span></p>
+
+<p>Hình ảnh:</p>
+<img th:src="@{'/images/' + ${cauThu.hinhAnh}}" alt="Ảnh cầu thủ" width="150" height="200"/>
+
+<p>Giới tính:
+    <span th:text="${cauThu.gioiTinh} ? 'Nam' : 'Nữ'"></span>
+</p>
+
+<!--<p>Môn học:-->
+<!--    <span th:each="mh : ${cauThu.monHoc}" th:text="${mh} + ' '"></span>-->
+<!--</p>-->
+
+<br>
+<a th:href="@{/Cauthu}">Quay lại danh sách</a>
+
+</body>
+</html>
