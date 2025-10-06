@@ -3,6 +3,8 @@ package com.example.demo_springboot.service;
 import com.example.demo_springboot.entity.CauThu;
 import com.example.demo_springboot.repository.ICauThuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,8 +40,13 @@ public class CauThuService implements ICauThuService {
         cauThuRepository.save(cauThu);
     }
 
-//    @Override
-//    public List<CauThu> searchByName(String hoTen) {
-//        return cauThuRepository.findAllByHoTenContaining(hoTen);
-//    }
+    @Override
+    public Page<CauThu> findAll(String hoTen, Pageable pageable) {
+        return cauThuRepository.findAllByHoTenContaining(hoTen,pageable);
+    }
+
+    @Override
+    public List<CauThu> searchByName(String hoTen) {
+        return cauThuRepository.findAllByHoTenContaining(hoTen);
+    }
 }

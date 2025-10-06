@@ -9,11 +9,16 @@
 <div th:replace="~{/layout/layout::header}"></div>
 
 <div class="container mt-4">
+    <div class="mb-3">
+        <a class="btn btn-success" th:href="@{/Cauthu/add}">Thêm mới cầu thủ</a>
+    </div>
+
     <h2 class="mb-4">Danh sách cầu thủ</h2>
-<!--    <form action="/Cauthu/search" method="get" class="mb-3">-->
-<!--        <input name="searchName" placeholder="Nhập tên">-->
-<!--        <button class="btn btn-secondary">Tìm kiếm</button>-->
-<!--    </form>-->
+
+    <form th:action="@{/Cauthu}" method="get" class="mb-3 d-flex">
+        <input type="text" name="searchName" th:value="${searchName}" placeholder="Nhập tên cầu thủ" class="form-control me-2"/>
+        <button class="btn btn-secondary">Tìm kiếm</button>
+    </form>
 
     <table class="table table-striped table-bordered table-hover align-middle text-center">
         <thead class="table-dark">
@@ -26,13 +31,12 @@
             <th>Vị Trí</th>
             <th>Hình Ảnh</th>
             <th>Giới Tính</th>
-<!--            <th>Môn Học</th>-->
             <th>Thao Tác</th>
         </tr>
         </thead>
 
         <tbody>
-        <tr th:each="cauthu, status : ${cauthuList}">
+        <tr th:each="cauthu, status : ${cauThuPage.content}">
             <td th:text="${status.count}"></td>
             <td th:text="${cauthu.maCauThu}"></td>
             <td th:text="${cauthu.hoTen}"></td>
@@ -40,21 +44,45 @@
             <td th:text="${cauthu.kinhNghiem}"></td>
             <td th:text="${cauthu.viTri}"></td>
             <td>
-                <img th:src="@{'/images/' + ${cauthu.hinhAnh}}"
-                     alt="Ảnh cầu thủ" class="img-thumbnail" width="100" height="130"/>
+                <img th:src="@{'/images/' + ${cauthu.hinhAnh}}" alt="Ảnh cầu thủ"
+                     class="img-thumbnail" width="100" height="130"/>
             </td>
-            <td th:text="${cauthu.gioiTinh}"></td>
-<!--            <td>-->
-<!--                <span th:each="monHoc : ${cauthu.monHoc}" th:text="${monHoc}"></span>-->
-<!--            </td>-->
+            <td th:text="${cauthu.gioiTinh ? 'Nam' : 'Nữ'}"></td>
             <td>
-                <a class="btn btn-sm btn-info" th:href="@{/Cauthu/detail/{id}(id=${cauthu.maCauThu})}">Chi Tiết</a>
+                <a class="btn btn-sm btn-info" th:href="@{/Cauthu/detail/{id}(id=${cauthu.maCauThu})}">Chi tiết</a>
                 <a class="btn btn-sm btn-warning" th:href="@{/Cauthu/edit/{id}(id=${cauthu.maCauThu})}">Sửa</a>
                 <a class="btn btn-sm btn-danger" th:href="@{/Cauthu/delete/{id}(id=${cauthu.maCauThu})}">Xóa</a>
             </td>
         </tr>
         </tbody>
     </table>
+
+    <!-- PHÂN TRANG -->
+    <nav th:if="${cauThuPage.totalPages > 1}">
+        <ul class="pagination justify-content-center">
+
+            <!-- Trang trước -->
+            <li class="page-item" th:classappend="${cauThuPage.first} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/Cauthu(page=${cauThuPage.number - 1}, searchName=${searchName})}">Trước</a>
+            </li>
+
+            <!-- Số trang -->
+            <li class="page-item"
+                th:each="i : ${#numbers.sequence(0, cauThuPage.totalPages - 1)}"
+                th:classappend="${i == cauThuPage.number} ? 'active'">
+                <a class="page-link"
+                   th:text="${i + 1}"
+                   th:href="@{/Cauthu(page=${i}, searchName=${searchName})}"></a>
+            </li>
+
+            <!-- Trang sau -->
+            <li class="page-item" th:classappend="${cauThuPage.last} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/Cauthu(page=${cauThuPage.number + 1}, searchName=${searchName})}">Sau</a>
+            </li>
+        </ul>
+    </nav>
 </div>
 </body>
 </html>
