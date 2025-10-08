@@ -1,33 +1,252 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
 <head>
     <meta charset="UTF-8">
     <title>Chi tiết cầu thủ</title>
     <th:block th:insert="~{/layout/layout::library}"/>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0f4ff, #e6eeff);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 40px;
+            color: #0056b3;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 700px;
+            background-color: #fff;
+            margin: 40px auto;
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.6s ease;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 10px 0;
+            margin: 0;
+        }
+
+        p:last-child {
+            border-bottom: none;
+        }
+
+        span {
+            font-weight: bold;
+            color: #222;
+        }
+
+        img {
+            display: block;
+            margin: 15px auto;
+            border-radius: 12px;
+            border: 3px solid #007bff;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(0, 123, 255, 0.5);
+        }
+
+        a {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            padding: 10px 25px;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-weight: 500;
+            margin-top: 20px;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
+
 <div th:replace="~{/layout/layout::header}"></div>
-<h1>Chi tiết cầu thủ</h1>
 
-<p>Mã cầu thủ: <span th:text="${cauThu.maCauThu}"></span></p>
-<p>Họ tên: <span th:text="${cauThu.hoTen}"></span></p>
-<p>Ngày sinh: <span th:text="${cauThu.ngaySinh}"></span></p>
-<p>Kinh nghiệm: <span th:text="${cauThu.kinhNghiem}"></span></p>
-<p>Vị trí: <span th:text="${cauThu.viTri}"></span></p>
+<div class="container">
+    <h1>Chi tiết cầu thủ</h1>
 
-<p>Hình ảnh:</p>
-<img th:src="@{'/images/' + ${cauThu.hinhAnh}}" alt="Ảnh cầu thủ" width="150" height="200"/>
+    <p>Mã cầu thủ: <span th:text="${cauThu.maCauThu}"></span></p>
+    <p>Họ tên: <span th:text="${cauThu.hoTen}"></span></p>
+    <p>Ngày sinh: <span th:text="${cauThu.ngaySinh}"></span></p>
+    <p>Kinh nghiệm: <span th:text="${cauThu.kinhNghiem}"></span></p>
+    <p>Vị trí: <span th:text="${cauThu.viTri}"></span></p>
 
-<p>Giới tính:
-    <span th:text="${cauThu.gioiTinh} ? 'Nam' : 'Nữ'"></span>
-</p>
+    <p>Hình ảnh:</p>
+    <img th:src="@{'/images/' + ${cauThu.hinhAnh}}" alt="Ảnh cầu thủ" width="180" height="230"/>
 
-<!--<p>Môn học:-->
-<!--    <span th:each="mh : ${cauThu.monHoc}" th:text="${mh} + ' '"></span>-->
-<!--</p>-->
+    <p>Giới tính:
+        <span th:text="${cauThu.gioiTinh} ? 'Nam' : 'Nữ'"></span>
+    </p>
 
-<br>
-<a th:href="@{/Cauthu}">Quay lại danh sách</a>
+    <div class="back-link">
+        <a th:href="@{/Cauthu}">⬅ Quay lại danh sách</a>
+    </div>
+</div>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chi tiết cầu thủ</title>
+    <th:block th:insert="~{/layout/layout::library}"/>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0f4ff, #e6eeff);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 40px;
+            color: #0056b3;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 700px;
+            background-color: #fff;
+            margin: 40px auto;
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.6s ease;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 10px 0;
+            margin: 0;
+        }
+
+        p:last-child {
+            border-bottom: none;
+        }
+
+        span {
+            font-weight: bold;
+            color: #222;
+        }
+
+        img {
+            display: block;
+            margin: 15px auto;
+            border-radius: 12px;
+            border: 3px solid #007bff;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(0, 123, 255, 0.5);
+        }
+
+        a {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            padding: 10px 25px;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-weight: 500;
+            margin-top: 20px;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div th:replace="~{/layout/layout::header}"></div>
+
+<div class="container">
+    <h1>Chi tiết cầu thủ</h1>
+
+    <p>Mã cầu thủ: <span th:text="${cauThu.maCauThu}"></span></p>
+    <p>Họ tên: <span th:text="${cauThu.hoTen}"></span></p>
+    <p>Ngày sinh: <span th:text="${cauThu.ngaySinh}"></span></p>
+    <p>Kinh nghiệm: <span th:text="${cauThu.kinhNghiem}"></span></p>
+    <p>Vị trí: <span th:text="${cauThu.viTri}"></span></p>
+
+    <p>Hình ảnh:</p>
+    <img th:src="@{'/images/' + ${cauThu.hinhAnh}}" alt="Ảnh cầu thủ" width="180" height="230"/>
+
+    <p>Giới tính:
+        <span th:text="${cauThu.gioiTinh} ? 'Nam' : 'Nữ'"></span>
+    </p>
+
+    <div class="back-link">
+        <a th:href="@{/Cauthu}">⬅ Quay lại danh sách</a>
+    </div>
+</div>
 
 </body>
 </html>

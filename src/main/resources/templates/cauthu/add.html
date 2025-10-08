@@ -1,58 +1,168 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Thêm mới cầu thủ</title>
     <th:block th:insert="~{/layout/layout::library}"/>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e8f0ff, #f7fbff);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 40px;
+            color: #004aad;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        form {
+            background-color: #fff;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.6s ease;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: 600;
+            color: #0056b3;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="number"],
+        input[type="file"] {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        a {
+            text-decoration: none;
+            background-color: #ccc;
+            color: #333;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #999;
+            color: #fff;
+        }
+
+        .radio-group {
+            margin-top: 5px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
 <div th:replace="~{/layout/layout::header}"></div>
-<h1>Thêm mới</h1>
+
+<h1>Thêm mới cầu thủ</h1>
+
 <form action="/Cauthu/add" method="post" th:object="${cauThu}">
-
-
     <p>
-        <label>Họ Tên:</label><br/>
-        <input th:field="*{hoTen}" />
+        <label>Họ Tên:</label>
+        <input th:field="*{hoTen}" type="text" placeholder="Nhập họ tên cầu thủ"/>
+        <small class="text-danger" th:if="${#fields.hasErrors('hoTen')}" th:errors="*{hoTen}"></small>
     </p>
 
     <p>
-        <label>Ngày Sinh:</label><br/>
-        <input th:field="*{ngaySinh}" type="date" />
+        <label>Ngày Sinh:</label>
+        <input th:field="*{ngaySinh}" type="date"/>
+        <small class="text-danger" th:if="${#fields.hasErrors('ngaySinh')}" th:errors="*{ngaySinh}"></small>
     </p>
 
     <p>
-        <label>Kinh Nghiệm:</label><br/>
-        <input th:field="*{kinhNghiem}" />
+        <label>Kinh Nghiệm:</label>
+        <input th:field="*{kinhNghiem}" type="text" placeholder="Số năm kinh nghiệm"/>
+        <small class="text-danger" th:if="${#fields.hasErrors('kinhNghiem')}" th:errors="*{kinhNghiem}"></small>
     </p>
 
     <p>
-        <label>Vị Trí:</label><br/>
-        <input th:field="*{viTri}" />
+        <label>Vị Trí:</label>
+        <input th:field="*{viTri}" type="text" placeholder="Nhập vị trí thi đấu"/>
+        <small class="text-danger" th:if="${#fields.hasErrors('viTri')}" th:errors="*{viTri}"></small>
     </p>
 
     <p>
-        <label>Ảnh đại diện :</label><br/>
-        <input th:field="*{hinhAnh}" />
+        <label>Ảnh đại diện:</label>
+        <input th:field="*{hinhAnh}" type="text" placeholder="Tên file ảnh hoặc URL"/>
+        <small class="text-danger" th:if="${#fields.hasErrors('hinhAnh')}" th:errors="*{hinhAnh}"></small>
     </p>
 
     <p>
-        <label>Giới tính:</label><br/>
-        <input type="radio" th:field="*{gioiTinh}" value="true"/> Nam
-        <input type="radio" th:field="*{gioiTinh}" value="false"/> Nữ
+        <label>Giới tính:</label>
+    <div class="radio-group">
+        <input type="radio" th:field="*{gioiTinh}" value="1"/> Nam
+        <input type="radio" th:field="*{gioiTinh}" value="0"/> Nữ
+    </div>
+    <small class="text-danger" th:if="${#fields.hasErrors('gioiTinh')}" th:errors="*{gioiTinh}"></small>
     </p>
-
-<!--    <p>-->
-<!--        <label>Môn học:</label><br/>-->
-<!--        <input type="checkbox" th:field="*{monHoc}" th:each="monHoc:${monHoc}" th:value="${monHoc}" th:text="${monHoc}"/><br>-->
-<!--    </p>-->
 
     <p>
-        <button type="submit">Lưu</button>
-        <a th:href="@{/Cauthu}">Hủy</a>
+        <button type="submit">💾 Lưu</button>
+        <a th:href="@{/Cauthu}">❌ Hủy</a>
     </p>
-
-
 </form>
+
 </body>
 </html>

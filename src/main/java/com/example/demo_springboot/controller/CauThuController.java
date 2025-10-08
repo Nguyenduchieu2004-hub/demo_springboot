@@ -1,7 +1,10 @@
 package com.example.demo_springboot.controller;
 
+import com.example.demo_springboot.Validation.CauThuValidate;
+import com.example.demo_springboot.dto.CauThuDTO;
 import com.example.demo_springboot.entity.CauThu;
 import com.example.demo_springboot.service.ICauThuService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -9,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -26,6 +31,7 @@ public class CauThuController {
     }
     @Autowired
     private ICauThuService cauThuService;
+
     // hiển thị danh sách
 //    @RequestMapping(value = "", method = RequestMethod.GET)
 //    public ModelAndView showList() {
@@ -61,17 +67,28 @@ public class CauThuController {
     //thêm mới
     @GetMapping("/add")
     public String showFormAdd(Model model) {
-        model.addAttribute("cauThu", new CauThu());
+        model.addAttribute("cauThu", new CauThuDTO());
+//        model.addAttribute("cauThu", new CauThu());
         return "cauthu/add";
     }
 
     @PostMapping("/add")
-    public String save(@ModelAttribute("cauThu") CauThu cauThu,
-                             RedirectAttributes redirectAttributes) {
+    public String save(@Validated @ModelAttribute("cauThu") CauThuDTO cauThuDTO,
+                       BindingResult bindingResult,
+                       RedirectAttributes redirectAttributes,
+                       Model model) {
+
+        if (bindingResult.hasErrors()) {
+            return "cauthu/add"; // giữ nguyên dữ liệu và hiển thị lỗi
+        }
+
+        CauThu cauThu = new CauThu();
+        BeanUtils.copyProperties(cauThuDTO, cauThu);
         cauThuService.addCauThu(cauThu);
         redirectAttributes.addFlashAttribute("mess", "Thêm cầu thủ thành công!");
         return "redirect:/Cauthu";
     }
+
     //tìm kiếm
     @GetMapping(value = "/search")
     public ModelAndView search(@RequestParam(name = "searchName") String searchName) {
