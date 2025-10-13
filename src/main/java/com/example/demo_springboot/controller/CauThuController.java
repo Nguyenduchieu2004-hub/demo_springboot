@@ -79,7 +79,7 @@ public class CauThuController {
                        Model model) {
 
         if (bindingResult.hasErrors()) {
-            return "cauthu/add"; // giữ nguyên dữ liệu và hiển thị lỗi
+            return "cauthu/add";
         }
 
         CauThu cauThu = new CauThu();
