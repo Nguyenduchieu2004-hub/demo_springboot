@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface ICauThuService {
-    List<CauThu> findAll();
+    Page<CauThu> findAll(Pageable pageable);
     CauThu findById(int id);
     Boolean addCauThu(CauThu cauThu);
     void deleteCauThu(int id);

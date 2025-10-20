@@ -14,8 +14,8 @@ public class CauThuService implements ICauThuService {
     @Autowired
     private ICauThuRepository cauThuRepository;
     @Override
-    public List<CauThu> findAll() {
-        return cauThuRepository.findAll();
+    public Page<CauThu> findAll(Pageable pageable) {
+        return cauThuRepository.findAll(pageable);
     }
 
     @Override

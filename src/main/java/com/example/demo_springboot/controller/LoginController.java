@@ -26,7 +26,7 @@ public class LoginController {
                            Model model) {
         Cookie cookie = new Cookie("rememberEmail", rememberedEmail);
         model.addAttribute("emailRemembered", cookie.getValue());
-        return "login";
+        return "views/login";
     }
 
     @PostMapping("/doLogin")
@@ -49,6 +49,6 @@ public class LoginController {
             user.setEmail("");
         }
 
-        return "login";
+        return "views/login";
     }
 }
